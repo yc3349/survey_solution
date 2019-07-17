@@ -1,0 +1,55 @@
+#import json file
+import json
+
+# friends list to store all personales
+friends = []
+
+# store each individual data to a list called person
+person = {}
+
+# a name list to store all the names
+name = []
+# an age list to store all the ages
+age = []
+# a place list to store all the places
+place = []
+
+# Gathering data
+# I'm gathering 4 responses
+for i in range(4):
+    #Asking for user input
+    your_name = input("What's your name ")
+    #append each name to the name list
+    name.append(your_name)
+    #add the response to the dictionary with the key 'name' and the value (whatever user puts)
+    person['name'] = name
+
+
+    your_age = input("How old are you ")
+    age.append(your_age)
+    person['age'] = age
+
+    your_place = input("Where were you born ")
+    place.append(your_place)
+    person['place'] = place
+
+#append all the response to friends list
+friends.append(person)
+
+#print out friends list
+print(friends)
+
+
+#saving all the responses to response.json
+with open('response.json', 'w') as outfile:
+    json.dump(friends, outfile)
+
+#load the data 
+with open('response.json', 'r') as outfile:
+    jsonToDict = json.load(outfile)
+
+    #Where's everybody from
+    where_from = []
+    for item in jsonToDict:
+        where_from.append(item['place'])
+    print(where_from)
